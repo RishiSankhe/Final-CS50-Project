@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Songs - Cape Town Travel</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <style>
+            /* Global Styles */
+            body {
+                font-family: 'Arial', sans-serif;
+                line-height: 1.6;
+                background-color: #f8f9fa;
+                margin: 0;
+                padding: 0;
+            }
+
+            /* Main Content Styling */
+            .container {
+                max-width: 900px;
+                margin: auto;
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 2rem;
+                color: #b8860b;
+                /* Dark yellow/ochre color */
+                font-weight: bold;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            .lead {
+                font-size: 1.2rem;
+                margin-bottom: 20px;
+            }
+
+            ul {
+                padding-left: 20px;
+            }
+
+            ul li {
+                margin-bottom: 10px;
+            }
+
+            ul li strong {
+                color: #b8860b;
+                /* Dark yellow/ochre color */
+            }
+
+            /* Song Section */
+            .song-section {
+                background-color: #ffffff;
+                padding: 30px;
+                border-radius: 8px;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+                margin-bottom: 20px;
+            }
+
+            .spotify-container {
+                margin-top: 20px;
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            iframe {
+                width: 100%;
+                height: 352px;
+                border: none;
+            }
+
+            /* Back to Home Button */
+            .back-home-btn {
+                background-color: #b8860b;
+                /* Dark yellow/ochre color */
+                color: #fff;
+                border: none;
+                padding: 15px 0;
+                font-size: 1.2rem;
+                width: 100%;
+                text-align: center;
+                display: block;
+                text-decoration: none;
+                border-radius: 8px;
+                margin-top: 20px;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .back-home-btn:hover {
+                background-color: #996b00;
+                /* Slightly darker ochre for hover effect */
+                text-decoration: none;
+            }
+
+            /* Footer */
+            footer {
+                background-color: #212529;
+                color: #f8f9fa;
+                text-align: center;
+                padding: 15px 0;
+                margin-top: 20px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- Navbar -->
+        {% include 'cape_town/navbar.html' %}
+
+        <!-- Main Content -->
+        <div class="container my-5">
+            <h2>Song That Embodies Cape Town: "<strong>Waka Waka (This Time for Africa)</strong>"</h2>
+            <p class="lead">
+                Cape Town, with its breathtaking landscapes and vibrant culture, is perfectly captured in the energetic song "<strong>Waka Waka</strong>". This track reflects the city's rich diversity, spirit of unity, and lively energy.
+            </p>
+            <p>
+                Originally performed by Shakira for the 2010 FIFA World Cup, this song has become a symbol of celebration, joy, and resilience, embodying the essence of Cape Town and South Africa as a whole.
+            </p>
+            <ul>
+                <li><strong>Celebratory Spirit:</strong> The song mirrors the vibrant atmosphere of Cape Town, where festivals and celebrations bring people together.</li>
+                <li><strong>African Roots:</strong> With its Afrobeat rhythm and Zangalewa chant, the track showcases the cultural heritage of the continent.</li>
+                <li><strong>Global Appeal:</strong> The song's universal message of hope and unity resonates with listeners worldwide.</li>
+                <li><strong>Energetic and Inspiring:</strong> Much like Cape Town, the song is uplifting and leaves you feeling inspired.</li>
+            </ul>
+
+            <!-- Spotify Embed Section -->
+            <div class="spotify-container">
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/6bNB5gxFX6Q87DbQWb8OWZ?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
+
+            <!-- Back to Home Button -->
+            <a href="{{ url_for('explore', city_name='cape_town', subpage='index') }}" class="back-home-btn">Back to Home</a>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-dark text-white text-center py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <a href="{{ url_for('index') }}" class="btn btn-light">Take me back to the main page</a>
+                    </div>
+                    <div class="col-12">
+                        &copy; 2024 Cape Town Travel. All Rights Reserved.
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Bootstrap JS and Popper.js -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    </body>
+
+</html>

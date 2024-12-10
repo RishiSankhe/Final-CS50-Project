@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Songs - New York Travel</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <style>
+            /* Global Styles */
+            body {
+                font-family: 'Arial', sans-serif;
+                line-height: 1.6;
+                background-color: #f8f9fa;
+                margin: 0;
+                padding: 0;
+            }
+
+            /* Main Content Styling */
+            .container {
+                max-width: 900px;
+                margin: auto;
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 2rem;
+                color: #e44232;
+                font-weight: bold;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            .lead {
+                font-size: 1.2rem;
+                margin-bottom: 20px;
+            }
+
+            ul {
+                padding-left: 20px;
+            }
+
+            ul li {
+                margin-bottom: 10px;
+            }
+
+            ul li strong {
+                color: #e44232;
+            }
+
+            /* Song Section */
+            .song-section {
+                background-color: #ffffff;
+                padding: 30px;
+                border-radius: 8px;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+                margin-bottom: 20px;
+            }
+
+            .spotify-container {
+                margin-top: 20px;
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            iframe {
+                width: 100%;
+                height: 352px;
+                border: none;
+            }
+
+            /* Back to Home Button */
+            .back-home-btn {
+                background-color: #b32d2e;
+                color: #fff;
+                border: none;
+                padding: 15px 0;
+                font-size: 1.2rem;
+                width: 100%;
+                text-align: center;
+                display: block;
+                text-decoration: none;
+                border-radius: 8px;
+                margin-top: 20px;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .back-home-btn:hover {
+                background-color: #931e1f;
+                text-decoration: none;
+            }
+
+            /* Footer */
+            footer {
+                background-color: #212529;
+                color: #f8f9fa;
+                text-align: center;
+                padding: 15px 0;
+                margin-top: 20px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- Navbar -->
+        {% include 'new_york_city/navbar.html' %}
+
+        <!-- Main Content -->
+        <div class="container my-5">
+            <h2>Song That Embodies New York: "<strong>Empire State of Mind</strong>"</h2>
+            <p class="lead">
+                New York City, the heart of the world, has inspired countless anthems, but none capture its soul quite like "<strong>Empire State of Mind</strong>" by Jay-Z and Alicia Keys. This song is a powerful homage to the city that never sleeps, celebrating its energy, dreams, and iconic landmarks.
+            </p>
+            <p>
+                From Times Square to Harlem, the song paints a vivid picture of New York's unique spirit. The stirring lyrics and powerful melody inspire both residents and visitors to dream big and embrace the city's endless possibilities.
+            </p>
+            <ul>
+                <li><strong>Inspiring Ambition:</strong> The song embodies New York's drive and ambition, encouraging everyone to pursue their dreams.</li>
+                <li><strong>City Landmarks:</strong> Iconic places like the Brooklyn Bridge and Empire State Building are woven into the track, making it a love letter to the city.</li>
+                <li><strong>Cultural Diversity:</strong> The song reflects the melting pot of cultures that define New York.</li>
+                <li><strong>Timeless Anthem:</strong> With its unforgettable melody and lyrics, the track remains a timeless celebration of New York.</li>
+            </ul>
+
+            <!-- Spotify Embed Section -->
+            <div class="spotify-container">
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/2igwFfvr1OAGX9SKDCPBwO?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
+
+            <!-- Back to Home Button -->
+            <a href="{{ url_for('explore', city_name='new_york_city', subpage='index') }}" class="back-home-btn">Back to Home</a>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-dark text-white text-center py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <a href="{{ url_for('index') }}" class="btn btn-light">Take me back to the main page</a>
+                    </div>
+                    <div class="col-12">
+                        &copy; 2024 New York Travel. All Rights Reserved.
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Bootstrap JS and Popper.js -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    </body>
+
+</html>

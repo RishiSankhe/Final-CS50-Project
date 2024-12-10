@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Travel to Cape Town</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/static/city_style/food.css" rel="stylesheet">
+        <script src="/static/loader.js"></script>
+    </head>
+
+    <body>
+        <!-- Navbar -->
+        {% include 'cape_town/navbar.html' %}
+
+        <figure class="text-center mt-4">
+            <blockquote class="blockquote">
+                <h2>"Good food is the foundation of genuine happiness."</h2>
+            </blockquote>
+            <figcaption class="blockquote-footer">
+                Auguste Escoffier in <cite title="Source Title">1903</cite>
+            </figcaption>
+        </figure>
+
+        <hr class="custom-divider">
+
+        <div class="text-center">
+            <h5 class="display-5">Cape Town's Culinary Delights</h5>
+            <p>Discover the vibrant and diverse flavors of Cape Town, where heritage meets modern cuisine!</p>
+        </div>
+
+        <!-- Popular Dishes Table -->
+        <div class="container my-5">
+            <h3 class="text-center mb-4">Popular Dishes in Cape Town</h3>
+            <table class="table table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Dish</th>
+                        <th>Description</th>
+                        <th>Best Spot to Try</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Bobotie</td>
+                        <td>A spiced minced meat dish topped with an egg-based layer, baked to perfection.</td>
+                        <td>Kloof Street House</td>
+                    </tr>
+                    <tr>
+                        <td>Bunny Chow</td>
+                        <td>A hollowed-out bread filled with curry, a South African street food staple.</td>
+                        <td>The Eastern Food Bazaar</td>
+                    </tr>
+                    <tr>
+                        <td>Gatsby</td>
+                        <td>A loaded sandwich filled with chips, meats, and sauces—a Cape Town favorite!</td>
+                        <td>Super Fisheries</td>
+                    </tr>
+                    <tr>
+                        <td>Malva Pudding</td>
+                        <td>A sweet, spongy dessert served with a rich cream sauce.</td>
+                        <td>The Pot Luck Club</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Famous Food Spots Grid -->
+        <div class="container my-5">
+            <h3 class="text-center mb-4">Famous Food Spots in Cape Town</h3>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="{{ url_for('static', filename='cape_town/image5.jpeg') }}" class="card-img-top" alt="Street Food">
+                        <div class="card-body">
+                            <h5 class="card-title">Street Food</h5>
+                            <p class="card-text">
+                                Cape Town's vibrant street food scene is a reflection of its diverse culture. Visit markets
+                                like the **Old Biscuit Mill** and **Hout Bay Market** to savor dishes such as bunny chow,
+                                gourmet boerewors rolls, and Cape Malay samosas. Don’t miss out on the local favorite:
+                                Gatsby sandwiches, a massive, flavor-packed sub filled with chips, meats, and sauces.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="{{ url_for('static', filename='cape_town/image6.jpeg') }}" class="card-img-top" alt="Fine Dining">
+                        <div class="card-body">
+                            <h5 class="card-title">Fine Dining</h5>
+                            <p class="card-text">
+                                Cape Town boasts a world-class fine dining scene, with restaurants offering breathtaking
+                                views and award-winning menus. Indulge in seasonal dishes at **La Colombe**, consistently
+                                ranked among the best in the world, or enjoy a sustainable, seafood-focused meal at
+                                **The Test Kitchen**. For a memorable experience, try **Signal Restaurant** at the Cape Grace Hotel,
+                                blending Cape flavors with global inspirations.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="{{ url_for('static', filename='cape_town/image7.jpeg') }}" class="card-img-top" alt="Desserts">
+                        <div class="card-body">
+                            <h5 class="card-title">Desserts</h5>
+                            <p class="card-text">
+                                Cape Town is a paradise for dessert lovers. Treat yourself to freshly baked koeksisters,
+                                a traditional South African sweet, or malva pudding, a moist sponge cake served with custard.
+                                Artisan bakeries like **Charly’s Bakery** offer colorful cakes and cupcakes, while
+                                **Unframed Ice Cream** serves up unique flavors crafted from local ingredients. Don’t forget
+                                to try Cape Town’s renowned Rooibos tea-infused desserts.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="custom-divider">
+
+        <!-- Accordion for FAQs -->
+        <div class="container my-5">
+            <h3 class="text-center mb-4">Frequently Asked Questions</h3>
+            <div class="accordion" id="foodFaq">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faqOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            What is Cape Town's must-try dish?
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="faqOne" data-bs-parent="#foodFaq">
+                        <div class="accordion-body">
+                            Bobotie is a must-try, offering a unique taste of Cape Malay cuisine.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faqTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Are there vegetarian options in Cape Town?
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="faqTwo" data-bs-parent="#foodFaq">
+                        <div class="accordion-body">
+                            Yes! Cape Town has numerous vegetarian options, including delicious bunny chow and veggie gatsbys.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faqThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Where can I find the best seafood in Cape Town?
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="faqThree" data-bs-parent="#foodFaq">
+                        <div class="accordion-body">
+                            The Codfather in Camps Bay is famous for its fresh seafood platters.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="custom-divider">
+
+        <!-- Testimonials Section -->
+        <div class="container my-5">
+            <h3 class="text-center mb-4">What Visitors Say</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <blockquote class="blockquote">
+                        <p>"The Gatsby sandwich was out of this world! Perfect for sharing." <br /> ~ Liam from Sydney</p>
+                    </blockquote>
+                </div>
+                <div class="col-md-6">
+                    <blockquote class="blockquote">
+                        <p>"The seafood in Cape Town is unbeatable—super fresh and delicious." <br /> ~ Emma from London</p>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+
+        <footer class="bg-dark text-white text-center py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <a href="{{ url_for('index') }}" class="btn btn-light">Take me back to the main page</a>
+                    </div>
+                    <div class="col-12">
+                        &copy; 2024 Cape Town Travel. All Rights Reserved.
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    </body>
+
+</html>

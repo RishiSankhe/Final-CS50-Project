@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Weather in Rio de Janeiro</title>
+        <!-- Google Fonts for better typography -->
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/static/city_style/weather.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <!-- Navbar -->
+        {% include 'rio_de_janeiro/navbar.html' %}
+
+        <div class="container">
+            <!-- Two Containers Side-by-Side -->
+            <div class="row content-section">
+                <div class="col-md-6">
+                    <div class="content-box">
+                        <h3 class="text-center">What to Wear</h3>
+                        <p class="text-center">In Rio de Janeiro, dressing light and breezy is essential due to its tropical climate. Opt for comfortable fabrics like cotton and linen to beat the heat. During the rainy season (December to March), a light rain jacket or umbrella is handy for unexpected showers. Beachwear is appropriate on Rio’s famous beaches, but casual summer outfits are recommended for city exploration. Don’t forget sunscreen and a hat to stay protected from the sun!</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="content-box">
+                        <h3 class="text-center">Weather Overview</h3>
+                        <p class="text-center">Rio de Janeiro experiences a tropical climate with warm and humid weather year-round. Summer (December to March) brings high temperatures, often exceeding 30°C (86°F), along with occasional rain showers. Winter (June to August) is mild, with temperatures averaging 20°C to 25°C (68°F to 77°F), making it an ideal time for outdoor activities.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Current Weather Information Below -->
+            <div class="row content-section">
+                <div class="col-md-12">
+                    <div class="weather-info">
+                        <h1 class="text-center mb-4">Current Weather Information for Rio de Janeiro</h1>
+                        <div id="weather-data">
+                            <p>Loading weather data...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Back to Home Button with padding -->
+            <div class="row back-home-section">
+                <div class="col-md-12">
+                    <a href="{{ url_for('explore', city_name='rio_de_janeiro', subpage='index') }}" class="btn btn-primary mt-4">Back to Home</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer which allows user to return to main page -->
+        <footer class="bg-dark text-white text-center py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <a href="{{ url_for('index') }}" class="btn btn-light">Take me back to the main page</a>
+                    </div>
+                    <div class="col-12">
+                        &copy; 2024 Rio De Janeiro Travel. All Rights Reserved.
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+        <script>
+            // Set the city and API key for OpenWeatherMap API
+            const city = "Rio De Janeiro";
+            const API_KEY = 'b6725bb82b4fd00cfeb5450908c9492c';
+
+            // Fetch current weather data for the specified city from the openweathermap website
+            fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.cod === 200) { // Check if the API call was successful
+                        // Generate HTML content for displaying weather information
+                        const weatherInfo = `
+                            <h2 class="text-primary">Weather right now in ${data.name}</h2>
+                            <p><strong>Temperature:</strong> ${data.main.temp}°C</p>
+                            <p><strong>Humidity:</strong> ${data.main.humidity}%</p>
+                            <p><strong>Pressure:</strong> ${data.main.pressure} hPa</p>
+                            <p><strong>Wind Speed:</strong> ${data.wind.speed} m/s</p>
+                            <p><strong>Description:</strong> ${data.weather[0].description}</p>
+                        `;
+                        // Update the DOM with the fetched weather data
+                        document.getElementById('weather-data').innerHTML = weatherInfo;
+                    } else {
+                        // Display an error message if the API call fails
+                        document.getElementById('weather-data').innerHTML = '<p class="text-danger">Error fetching weather data.</p>';
+                    }
+                })
+                .catch(error => {
+                    // Handle network or other errors gracefully
+                    document.getElementById('weather-data').innerHTML = `<p class="text-danger">Error fetching weather data: ${error}</p>`;
+                });
+        </script>
+    </body>
+
+</html>

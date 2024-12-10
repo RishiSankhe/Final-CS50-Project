@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Travel to Rio de Janeiro</title>
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link href="/static/city_style/index.css" rel="stylesheet">
+        <script src="/static/loader.js"></script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                // Carousel functionality for sliding images
+                let currentSlide = 0;
+                const slides = document.querySelectorAll('.carousel-slide img');
+                const totalSlides = slides.length;
+                const carouselSlide = document.querySelector('.carousel-slide');
+
+                // Function to move to the next or previous slide
+                function moveSlide(step) {
+                    currentSlide = (currentSlide + step + totalSlides) % totalSlides;
+                    carouselSlide.style.transform = `translateX(-${currentSlide * (100 / totalSlides)}%)`;
+                }
+
+                // Automatic sliding every 6 seconds
+                const autoSlide = setInterval(() => {
+                    moveSlide(1);
+                }, 6000);
+
+                // Add event listeners for the carousel controls (next/previous buttons)
+                document.querySelectorAll('.carousel-control').forEach(control => {
+                    control.addEventListener('click', () => {
+                        clearInterval(autoSlide);
+                        moveSlide(control.classList.contains('left') ? -1 : 1);
+                    });
+                });
+            });
+
+            document.addEventListener('DOMContentLoaded', () => {
+                // Fetch news data for Rio de Janeiro using an API
+                const requestOptions = {
+                    method: 'GET'
+                };
+
+                // Parameters for the API request
+                const params = {
+                    api_token: 'r4TYmmO2O5EznzYKieAjNgA5E4iDREZBHcq6AOsB',
+                    categories: 'general',
+                    search: 'rio de janeiro',
+                    limit: '3',
+                    language: 'en'
+                };
+
+                // Build the query string for news API
+                const esc = encodeURIComponent;
+                const query = Object.keys(params)
+                    .map(k => esc(k) + '=' + esc(params[k]))
+                    .join('&');
+
+                // Make a fetch request to the news API
+                fetch("https://api.thenewsapi.com/v1/news/all?" + query, requestOptions)
+                    .then(response => response.json())
+                    .then(data => {
+                        const newsContainer = document.getElementById('news-container');
+                        data.data.forEach(article => {
+                            const col = document.createElement('div');
+                            col.className = 'col-md-4 mb-4';
+
+                            const card = `
+                            <div class="card">
+                                <img src="${article.image_url}" class="card-img-top" alt="${article.title}">
+                                <div class="card-body">
+                                    <h5 class="card-title">${article.title}</h5>
+                                    <p class="card-text">${article.description}</p>
+                                    <a href="${article.url}" target="_blank" class="btn btn-primary">Read More</a>
+                                </div>
+                            </div>
+                        `;
+
+                            col.innerHTML = card;
+                            newsContainer.appendChild(col);
+                        });
+                    })
+                    .catch(error => console.log('error', error));
+            });
+
+            // Function to add the selected city to the bucketlist
+            function addToBucketlist(button) {
+                fetch('/add_to_bucketlist', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        city_name: button.dataset.city
+                    })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            button.innerText = "Added";
+                            button.disabled = true; // Disable button after adding
+                        }
+                    });
+            }
+        </script>
+    </head>
+
+    <body>
+        <!-- Navbar -->
+        {% include 'rio_de_janeiro/navbar.html' %}
+
+        <div class="carousel-container">
+            <div class="carousel">
+                <div class="carousel-slide">
+                    <img src="{{ url_for('static', filename='rio_de_janeiro/car1.jpeg') }}" alt="Image 1">
+                    <img src="{{ url_for('static', filename='rio_de_janeiro/car2.jpeg') }}" alt="Image 2">
+                    <img src="{{ url_for('static', filename='rio_de_janeiro/car3.jpeg') }}" alt="Image 3">
+                    <img src="{{ url_for('static', filename='rio_de_janeiro/car4.jpeg') }}" alt="Image 4">
+                    <img src="{{ url_for('static', filename='rio_de_janeiro/car5.jpeg') }}" alt="Image 5">
+                </div>
+            </div>
+            <div class="carousel-text">
+                <h1>Welcome to Rio de Janeiro!</h1>
+                <h1><span>
+                    <p class="lead">Rio, the city of samba, sun, and sea, is known for its vibrant culture and iconic landmarks like the Christ the Redeemer and Sugarloaf Mountain!</p>
+                </span></h1>
+            </div>
+            <button class="carousel-control left" onclick="moveSlide(-1)">&#10094;</button>
+            <button class="carousel-control right" onclick="moveSlide(1)">&#10095;</button>
+        </div>
+
+        <!-- About Rio -->
+        <section class="container my-5">
+            <h2 class="text-center mb-4 section-title">Discover Rio de Janeiro</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="{{ url_for('static', filename='rio_de_janeiro/image1.jpeg') }}" alt="Christ the Redeemer" class="img-fluid rounded">
+                </div>
+                <div class="col-md-6">
+                    <h3 class="section-title-small">Christ the Redeemer</h3>
+                    <p>One of the Seven Wonders of the World, this iconic statue overlooks Rio from the Corcovado Mountain and offers breathtaking views of the city.</p>
+                    <ul>
+                        <li><b>Location:</b> Corcovado Mountain</li>
+                        <li><b>Entry Fee:</b> R$30</li>
+                        <li><b>Best Time to Visit:</b> Early morning or sunset</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Iconic Monuments -->
+        <section class="bg-light py-5">
+            <div class="container">
+                <h2 class="text-center mb-4 section-title">Iconic Monuments</h2>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <img src="{{ url_for('static', filename='rio_de_janeiro/image2.jpeg') }}" alt="Sugarloaf Mountain" class="img-fluid rounded">
+                            <div class="card-body">
+                                <h5 class="card-title">Sugarloaf Mountain</h5>
+                                <p class="card-text">Take a cable car ride to this granite peak for panoramic views of Rio, its beaches, and the beautiful coastline.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <img src="{{ url_for('static', filename='rio_de_janeiro/image3.jpeg') }}" class="card-img-top" alt="Selarón Steps">
+                            <div class="card-body">
+                                <h5 class="card-title">Selarón Steps</h5>
+                                <p class="card-text">An artistic masterpiece in Lapa, these vibrant mosaic steps are a stunning tribute to Brazilian creativity and culture.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <img src="{{ url_for('static', filename='rio_de_janeiro/image4.jpeg') }}" alt="Maracanã Stadium" class="img-fluid rounded">
+                            <div class="card-body">
+                                <h5 class="card-title">Maracanã Stadium</h5>
+                                <p class="card-text">A legendary venue for football fans, this stadium has hosted iconic matches and events, including World Cup finals.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Culture and Festivals -->
+        <section class="container my-5 culture-section">
+            <h2 class="text-center mb-4 section-title">Culture and Festivals</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Carnival</h3>
+                    <p>Rio’s Carnival is the world’s largest and most spectacular festival, featuring samba parades, street parties, and vibrant costumes.</p>
+                </div>
+                <div class="col-md-6">
+                    <h3>Beach Culture</h3>
+                    <p>Rio’s beaches, like Copacabana and Ipanema, are at the heart of its social life, offering sun, sea, and samba beats.</p>
+                </div>
+            </div>
+        </section>
+
+        <hr>
+
+        <section class="container my-5">
+            <h2 class="text-center mb-4 section-title">Latest News</h2>
+            <div id="news-container" class="row">
+                <!-- News articles will be dynamically added here through the js code that has been included -->
+            </div>
+        </section>
+
+        <!-- Footer which allows user to return to home as well as add the place to bucketlist-->
+        <footer class="bg-dark text-white text-center py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <button class="btn btn-success btn-lg" onclick="addToBucketlist(this)" data-city="Rio De Janeiro">
+                            <i class="bi bi-plus"></i> Add to Bucketlist
+                        </button>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <a href="{{ url_for('index') }}" class="btn btn-light">Take me back to the main page</a>
+                    </div>
+                    <div class="col-12">
+                        &copy; 2024 Rio De Janeiro Travel. All Rights Reserved.
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </body>
+
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Songs - Tokyo Travel</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <style>
+            /* Global Styles */
+            body {
+                font-family: 'Arial', sans-serif;
+                line-height: 1.6;
+                background-color: #f8f9fa;
+                margin: 0;
+                padding: 0;
+            }
+
+            /* Main Content Styling */
+            .container {
+                max-width: 900px;
+                margin: auto;
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 2rem;
+                color: #e44232;
+                /* Red color matching Spotify and Back to Home theme */
+                font-weight: bold;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            .lead {
+                font-size: 1.2rem;
+                margin-bottom: 20px;
+            }
+
+            ul {
+                padding-left: 20px;
+            }
+
+            ul li {
+                margin-bottom: 10px;
+            }
+
+            ul li strong {
+                color: #e44232;
+                /* Red color matching Spotify song theme */
+            }
+
+            /* Song Section */
+            .song-section {
+                background-color: #ffffff;
+                padding: 30px;
+                border-radius: 8px;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+                margin-bottom: 20px;
+            }
+
+            .spotify-container {
+                margin-top: 20px;
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            iframe {
+                width: 100%;
+                height: 352px;
+                border: none;
+            }
+
+            /* Back to Home Button */
+            .back-home-btn {
+                background-color: #b32d2e;
+                /* Dark red color for button */
+                color: #fff;
+                border: none;
+                padding: 15px 0;
+                font-size: 1.2rem;
+                width: 100%;
+                text-align: center;
+                display: block;
+                text-decoration: none;
+                border-radius: 8px;
+                margin-top: 20px;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .back-home-btn:hover {
+                background-color: #931e1f;
+                text-decoration: none;
+            }
+
+            /* Footer */
+            footer {
+                background-color: #212529;
+                color: #f8f9fa;
+                text-align: center;
+                padding: 15px 0;
+                margin-top: 20px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- Navbar -->
+        {% include 'tokyo/navbar.html' %}
+
+        <!-- Main Content -->
+        <div class="container my-5">
+            <h2>Song That Embodies Tokyo: "<strong>Lost In Japan</strong>"</h2>
+            <p class="lead">
+                Tokyo, a city of vibrant contrasts and deep traditions, is beautifully captured in Shawn Mendes' song "<strong>Lost In Japan</strong>". This melody reflects the fleeting beauty of cherry blossoms and the spirit of Japan.
+            </p>
+            <p>
+                This song is a poetic homage to Tokyo’s harmonious blend of modernity and tradition. Whether you're walking through the bustling streets or tranquil parks, "<strong>Lost In Japan</strong>" resonates with the city's timeless charm.
+            </p>
+            <ul>
+                <li><strong>Harmonic Elegance:</strong> The gentle tune mirrors the peaceful beauty of Tokyo's gardens and cherry blossom festivals.</li>
+                <li><strong>Deeply Cultural:</strong> A song rooted in Japan's cultural heritage, reflecting the love for nature and seasons.</li>
+                <li><strong>Universal Appeal:</strong> Its soothing melody connects people from all walks of life, much like Tokyo’s welcoming spirit.</li>
+                <li><strong>Iconic and Timeless:</strong> The song’s enduring charm is as timeless as Tokyo’s ancient temples and shrines.</li>
+            </ul>
+
+            <!-- Spotify Embed Section -->
+            <div class="spotify-container">
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/79esEXlqqmq0GPz0xQSZTV?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
+
+            <!-- Back to Home Button -->
+            <a href="{{ url_for('explore', city_name='tokyo', subpage='index') }}" class="back-home-btn">Back to Home</a>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-dark text-white text-center py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <a href="{{ url_for('index') }}" class="btn btn-light">Take me back to the main page</a>
+                    </div>
+                    <div class="col-12">
+                        &copy; 2024 Tokyo Travel. All Rights Reserved.
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Bootstrap JS and Popper.js -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    </body>
+
+</html>

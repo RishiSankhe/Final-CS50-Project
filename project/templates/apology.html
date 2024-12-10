@@ -1,0 +1,107 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Apology
+{% endblock %}
+
+{% block main %}
+
+    <head>
+    <!-- Importing Google Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Lora&display=swap" rel="stylesheet">
+        <style>
+        /* Body Styling: Full-page background with fixed image and elegant typography */
+            body {
+                background-image: url('/static/wallpaper2.jpg');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                font-family: 'Lora', serif;
+                color: #333;
+                min-height: 100vh;
+            }
+
+        /* Container: Centers the card both horizontally and vertically */
+            .container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+            }
+
+        /* Card Styling: Gradient background, rounded corners, and fade-in animation */
+            .card {
+                max-width: 500px;
+                width: 100%;
+                background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                opacity: 0;
+                animation: fadeIn 0.8s ease-out forwards;
+            }
+
+        /* Animation: Smooth fade-in effect for the card */
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+        /* Heading Styling: Bold, white text for prominence */
+            h1 {
+                font-family: 'Roboto', sans-serif;
+                font-weight: 700;
+                color: #ffffff;
+                margin-bottom: 1rem;
+            }
+
+        /* Text Styling: Light gray paragraph text for readability */
+            p {
+                font-size: 1.1rem;
+                line-height: 1.6;
+                color: #f0f0f0;
+            }
+
+        /* Button Styling: Rounded, interactive buttons with hover effects */
+            .btn-light {
+                border-radius: 30px;
+                padding: 12px 30px;
+                font-weight: 600;
+                background-color: #ffffff;
+                color: #6a11cb;
+                border: none;
+                transition: all 0.3s ease;
+            }
+
+        /* Button Hover Effect: Subtle lift and color change */
+            .btn-light:hover {
+                background-color: #f0f0f0;
+                color: #2575fc;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            }
+        </style>
+    </head>
+
+    <div class="container">
+    <!-- Card: Displays error message and return home button -->
+        <div class="card shadow-lg p-5">
+            <div class="text-center">
+                <h1 class="display-4">Error!</h1>
+                <p class="lead mb-4">
+                    {{ bottom }}
+                </p>
+            </div>
+            <div class="d-flex justify-content-center">
+                <a href="/" class="btn btn-light btn-lg">Return Home</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

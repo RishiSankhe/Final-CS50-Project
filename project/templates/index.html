@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <main class="hero">
+    <!-- Map container -->
+        <div id="globe-container"></div>
+
+    <!-- Left Content -->
+        <div class="hero-content">
+            <h1 class="hero-title">Explore the World <br> in 10 Clicks</h1>
+            <p class="hero-description">Discover endless possibilities and adventures across the globe.</p>
+            <a href="/quiz" class="button-primary">Get Started</a>
+        </div>
+    </main>
+
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoicmlzaGk0MTI2IiwiYSI6ImNtNGV2czB0MjB6dnoyam9tdnFlczJhZ3UifQ.HGMhD37Hl8PffSTKpz79wg'; // Replace with a valid token
+
+    // Initialize the map
+        const map = new mapboxgl.Map({
+            container: 'globe-container',
+            style: 'mapbox://styles/mapbox/satellite-v9',
+            center: [45, 0], // Center longitude shifted to position globe on the right
+            zoom: 1.5, // Initial zoom level
+            projection: 'globe', // Enable globe projection
+            interactive: true, // Allow manual interactions
+        });
+
+        let isUserInteracting = false; // Track if the user is interacting
+        let autoRotateTimeout; // Timeout to resume auto-rotation
+
+        map.on('load', () => {
+            console.log('Map loaded successfully!');
+            map.setFog({}); // Add fog for realistic 3D effects
+            startAutoRotation();
+        });
+
+    // Auto-rotation logic
+        function startAutoRotation() {
+            function rotate() {
+                if (!isUserInteracting) {
+                    const currentBearing = map.getBearing();
+                    map.setBearing(currentBearing + 0.1); // Increment bearing
+                }
+                requestAnimationFrame(rotate);
+            }
+            rotate();
+        }
+
+    // Pause auto-rotation on user interaction
+        map.on('mousedown', () => {
+            console.log('User started interacting with the map');
+            isUserInteracting = true;
+            clearTimeout(autoRotateTimeout); // Clear any pending timeout to resume auto-rotation
+        });
+
+        map.on('mouseup', () => {
+            console.log('User stopped interacting with the map');
+            isUserInteracting = false;
+            autoRotateTimeout = setTimeout(() => {
+                console.log('Resuming auto-rotation');
+                isUserInteracting = false;
+            }, 3000); // Resume auto-rotation after 3 seconds of inactivity
+        });
+
+    // Handle drag start to pause auto-rotation
+        map.on('dragstart', () => {
+            console.log('User started dragging the map');
+            isUserInteracting = true;
+            clearTimeout(autoRotateTimeout);
+        });
+
+    // Handle drag end to set up auto-rotation resumption
+        map.on('dragend', () => {
+            console.log('User stopped dragging the map');
+            autoRotateTimeout = setTimeout(() => {
+                console.log('Resuming auto-rotation');
+                isUserInteracting = false;
+            }, 3000); // Resume after 3 seconds of inactivity
+        });
+    </script>
+{% endblock %}

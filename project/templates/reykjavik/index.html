@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Travel to Reykjavík</title>
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link href="/static/city_style/index.css" rel="stylesheet">
+        <script src="/static/loader.js"></script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                // Carousel functionality for sliding images
+                let currentSlide = 0;
+                const slides = document.querySelectorAll('.carousel-slide img');
+                const totalSlides = slides.length;
+                const carouselSlide = document.querySelector('.carousel-slide');
+
+                // Function to move to the next or previous slide
+                function moveSlide(step) {
+                    currentSlide = (currentSlide + step + totalSlides) % totalSlides;
+                    carouselSlide.style.transform = `translateX(-${currentSlide * (100 / totalSlides)}%)`;
+                }
+
+                // Automatic sliding every 6 seconds
+                const autoSlide = setInterval(() => {
+                    moveSlide(1);
+                }, 6000);
+
+                // Add event listeners for the carousel controls (next/previous buttons)
+                document.querySelectorAll('.carousel-control').forEach(control => {
+                    control.addEventListener('click', () => {
+                        clearInterval(autoSlide);
+                        moveSlide(control.classList.contains('left') ? -1 : 1);
+                    });
+                });
+            });
+
+            document.addEventListener('DOMContentLoaded', () => {
+                // Fetch news data for Reykjavik using an API
+                const requestOptions = {
+                    method: 'GET'
+                };
+
+                // Parameters for the API request
+                const params = {
+                    api_token: 'r4TYmmO2O5EznzYKieAjNgA5E4iDREZBHcq6AOsB',
+                    categories: 'general',
+                    search: 'reykjavik',
+                    limit: '3',
+                    language: 'en'
+                };
+
+                // Build the query string for news API
+                const esc = encodeURIComponent;
+                const query = Object.keys(params)
+                    .map(k => esc(k) + '=' + esc(params[k]))
+                    .join('&');
+
+                // Make a fetch request to the news API
+                fetch("https://api.thenewsapi.com/v1/news/all?" + query, requestOptions)
+                    .then(response => response.json())
+                    .then(data => {
+                        const newsContainer = document.getElementById('news-container');
+                        data.data.forEach(article => {
+                            const col = document.createElement('div');
+                            col.className = 'col-md-4 mb-4';
+
+                            const card = `
+                            <div class="card">
+                                <img src="${article.image_url}" class="card-img-top" alt="${article.title}">
+                                <div class="card-body">
+                                    <h5 class="card-title">${article.title}</h5>
+                                    <p class="card-text">${article.description}</p>
+                                    <a href="${article.url}" target="_blank" class="btn btn-primary">Read More</a>
+                                </div>
+                            </div>
+                        `;
+
+                            col.innerHTML = card;
+                            newsContainer.appendChild(col);
+                        });
+                    })
+                    .catch(error => console.log('error', error));
+            });
+
+            // Function to add the selected city to the bucketlist
+            function addToBucketlist(button) {
+                fetch('/add_to_bucketlist', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        city_name: button.dataset.city
+                    })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            button.innerText = "Added";
+                            button.disabled = true; // Disable button after adding
+                        }
+                    });
+            }
+        </script>
+    </head>
+
+    <body>
+
+        <!-- Navbar -->
+        {% include 'reykjavik/navbar.html' %}
+
+        <div class="carousel-container">
+            <div class="carousel">
+                <div class="carousel-slide">
+                    <img src="{{ url_for('static', filename='reykjavik/car1.jpeg') }}" alt="Image 1">
+                    <img src="{{ url_for('static', filename='reykjavik/car2.jpeg') }}" alt="Image 2">
+                    <img src="{{ url_for('static', filename='reykjavik/car3.jpeg') }}" alt="Image 3">
+                    <img src="{{ url_for('static', filename='reykjavik/car4.jpeg') }}" alt="Image 4">
+                    <img src="{{ url_for('static', filename='reykjavik/car5.jpeg') }}" alt="Image 5">
+                </div>
+            </div>
+            <div class="carousel-text">
+                <h1>Welcome to Reykjavík!</h1>
+                <h1><span>
+                    <p class="lead">Reykjavík, Iceland's capital, is a vibrant city filled with stunning natural beauty, history, and unique culture. Discover the wonders of this Nordic gem!</p>
+                </span></h1>
+            </div>
+            <!--creates the left and right arrow button which the javascript code is listening for-->
+            <button class="carousel-control left" onclick="moveSlide(-1)">&#10094;</button>
+            <button class="carousel-control right" onclick="moveSlide(1)">&#10095;</button>
+        </div>
+
+        <!-- About Reykjavík -->
+        <section class="container my-5">
+            <h2 class="text-center mb-4 section-title">Discover Reykjavík</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="{{ url_for('static', filename='reykjavik/image1.jpeg') }}" alt="Hallgrímskirkja" class="img-fluid rounded">
+                </div>
+                <div class="col-md-6">
+                    <h3 class="section-title-small">Hallgrímskirkja</h3>
+                    <p>Hallgrímskirkja is Reykjavík’s most iconic landmark. This stunning Lutheran church offers panoramic views of the city and is a masterpiece of Icelandic architecture.</p>
+                    <ul>
+                        <li><b>Location:</b> Skólavörðuholt, Reykjavík</li>
+                        <li><b>Entry Fee:</b> Free (Observation Tower: $10)</li>
+                        <li><b>Best Time to Visit:</b> Early morning or sunset</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Iconic Monuments -->
+        <section class="bg-light py-5">
+            <div class="container">
+                <h2 class="text-center mb-4 section-title">Iconic Monuments</h2>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <img src="{{ url_for('static', filename='reykjavik/image2.jpeg') }}" alt="Sun Voyager" class="img-fluid rounded">
+                            <div class="card-body">
+                                <h5 class="card-title">Sun Voyager</h5>
+                                <p class="card-text">A stunning steel sculpture symbolizing exploration and freedom, located by the waterfront.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <img src="{{ url_for('static', filename='reykjavik/image3.jpeg') }}" class="card-img-top" alt="Harpa Concert Hall">
+                            <div class="card-body">
+                                <h5 class="card-title">Harpa Concert Hall</h5>
+                                <p class="card-text">A magnificent glass structure and cultural hub hosting concerts, events, and exhibitions.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <img src="{{ url_for('static', filename='reykjavik/image4.jpeg') }}" alt="Perlan" class="img-fluid rounded">
+                            <div class="card-body">
+                                <h5 class="card-title">Perlan</h5>
+                                <p class="card-text">A unique glass dome with exhibitions, a planetarium, and incredible views of Reykjavík.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Culture and Festivals -->
+        <section class="container my-5 culture-section">
+            <h2 class="text-center mb-4 section-title">Culture and Festivals</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Winter Lights Festival</h3>
+                    <p>Experience the magic of Reykjavík with captivating light installations, music, and cultural events celebrating the city’s creativity and warmth.</p>
+                </div>
+                <div class="col-md-6">
+                    <h3>Reykjavík Culture Night</h3>
+                    <p>An annual festival filled with art, music, and fireworks, showcasing Reykjavík’s artistic spirit and community.</p>
+                </div>
+            </div>
+        </section>
+
+        <hr>
+
+        <section class="container my-5">
+            <h2 class="text-center mb-4 section-title">Latest News</h2>
+            <div id="news-container" class="row">
+                <!-- News articles will be dynamically added here through the js code that has been included -->
+            </div>
+        </section>
+
+        <!-- Footer which allows user to return to home as well as add the place to bucketlist-->
+        <footer class="bg-dark text-white text-center py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <button class="btn btn-success btn-lg" onclick="addToBucketlist(this)" data-city="Reykjavik">
+                            <i class="bi bi-plus"></i> Add to Bucketlist
+                        </button>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <a href="{{ url_for('index') }}" class="btn btn-light">Take me back to the main page</a>
+                    </div>
+                    <div class="col-12">
+                        &copy; 2024 Reykjavik Travel. All Rights Reserved.
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    </body>
+
+</html>

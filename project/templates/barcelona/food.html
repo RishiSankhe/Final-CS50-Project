@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Travel to Barcelona</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/static/city_style/food.css" rel="stylesheet">
+        <script src="/static/loader.js"></script>
+    </head>
+
+    <body>
+        <!-- Navbar -->
+        {% include 'barcelona/navbar.html' %}
+
+        <figure class="text-center mt-4">
+            <blockquote class="blockquote">
+                <h2>"Barcelona: The city of art, food, and vibrant culture"</h2>
+            </blockquote>
+            <figcaption class="blockquote-footer">
+                A Traveler in <cite title="Source Title">2024</cite>
+            </figcaption>
+        </figure>
+
+        <hr class="custom-divider">
+
+        <div class="text-center">
+            <h5 class="display-5">Barcelona's Culinary Magic</h5>
+            <p>Experience the rich and diverse flavors of Barcelona – from tapas to Michelin-starred restaurants!</p>
+        </div>
+
+        <!-- Popular Dishes Table -->
+        <div class="container my-5">
+            <h3 class="text-center mb-4">Popular Dishes in Barcelona</h3>
+            <table class="table table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Dish</th>
+                        <th>Description</th>
+                        <th>Best Spot to Try</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Paella</td>
+                        <td>A flavorful rice dish typically made with seafood or chicken, cooked with saffron and spices.</td>
+                        <td>7 Portes, Gothic Quarter</td>
+                    </tr>
+                    <tr>
+                        <td>Tapas</td>
+                        <td>Small plates of a variety of dishes, including patatas bravas and croquetas.</td>
+                        <td>Bar del Pla, El Born</td>
+                    </tr>
+                    <tr>
+                        <td>Churros</td>
+                        <td>Fried dough pastries, served with thick hot chocolate for dipping.</td>
+                        <td>Granja Dulcinea, Gothic Quarter</td>
+                    </tr>
+                    <tr>
+                        <td>Crema Catalana</td>
+                        <td>A creamy dessert similar to crème brûlée, flavored with citrus and cinnamon.</td>
+                        <td>El Nacional, Passeig de Gràcia</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Famous Food Spots Grid -->
+        <div class="container my-5">
+            <h3 class="text-center mb-4">Famous Food Spots in Barcelona</h3>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="{{ url_for('static', filename='barcelona/image4.jpeg') }}" class="card-img-top" alt="Tapas in Barcelona">
+                        <div class="card-body">
+                            <h5 class="card-title">Tapas Culture</h5>
+                            <p class="card-text">
+                                Tapas are a cornerstone of Barcelona's culinary scene, offering a variety of small, flavorful dishes perfect for sharing. Popular options include patatas bravas, croquettes, jamón ibérico, and pan con tomate. Iconic spots to try tapas include Quimet & Quimet and Bar del Pla.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="{{ url_for('static', filename='barcelona/image5.jpeg') }}" class="card-img-top" alt="Seafood and Paella in Barcelona">
+                        <div class="card-body">
+                            <h5 class="card-title">Seafood and Paella</h5>
+                            <p class="card-text">
+                                Barcelona's proximity to the Mediterranean makes it a haven for seafood lovers. Signature dishes include grilled prawns, calamari, and Spain’s iconic paella, made with saffron-infused rice and fresh ingredients like mussels, shrimp, and clams. Don't miss the seafood restaurants in Barceloneta or paella at 7 Portes.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="{{ url_for('static', filename='barcelona/image6.jpeg') }}" class="card-img-top" alt="Churros and Desserts in Barcelona">
+                        <div class="card-body">
+                            <h5 class="card-title">Churros and Barcelona Desserts</h5>
+                            <p class="card-text">
+                                Indulge in sweet delights like churros dipped in thick chocolate, crema catalana (similar to crème brûlée), and turrón (nougat). Visit Granja Dulcinea for authentic churros or Pastisseria Escribà for exquisite cakes and pastries.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="custom-divider">
+
+        <!-- Accordion for FAQs -->
+        <div class="container my-5">
+            <h3 class="text-center mb-4">Frequently Asked Questions</h3>
+            <div class="accordion" id="foodFaq">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faqOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            What is Barcelona's must-try dish?
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="faqOne" data-bs-parent="#foodFaq">
+                        <div class="accordion-body">
+                            Barcelona's must-try dish is Paella, a flavorful rice dish often cooked with seafood.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faqTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Are there vegetarian options in Barcelona?
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="faqTwo" data-bs-parent="#foodFaq">
+                        <div class="accordion-body">
+                            Absolutely! Barcelona offers a variety of vegetarian tapas, including grilled vegetables, cheese platters, and patatas bravas.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faqThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Where can I find the best churros in Barcelona?
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="faqThree" data-bs-parent="#foodFaq">
+                        <div class="accordion-body">
+                            The best churros can be found at Granja Dulcinea in the Gothic Quarter.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="custom-divider">
+
+        <!-- Testimonials Section -->
+        <div class="container my-5">
+            <h3 class="text-center mb-4">What Visitors Say</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <blockquote class="blockquote">
+                        <p>"Barcelona's food scene is unforgettable. The tapas and paella were divine!" <br /> ~ Emily from London</p>
+                    </blockquote>
+                </div>
+                <div class="col-md-6">
+                    <blockquote class="blockquote">
+                        <p>"The seafood by the beach was the highlight of my trip. Highly recommend it!" <br /> ~ Carlos from Mexico City</p>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-dark text-white text-center py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <a href="{{ url_for('index') }}" class="btn btn-light">Take me back to the main page</a>
+                    </div>
+                    <div class="col-12">
+                        &copy; 2024 Barcelona Travel. All Rights Reserved.
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    </body>
+
+</html>

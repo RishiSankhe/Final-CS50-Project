@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel to Mumbai</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/city_style/food.css" rel="stylesheet">
+    <script src="/static/loader.js"></script>
+</head>
+
+<body>
+    <!-- Navbar -->
+    {% include 'mumbai/navbar.html' %}
+
+    <figure class="text-center mt-4">
+        <blockquote class="blockquote">
+            <h2>"Let food be thy medicine and medicine be thy food"</h2>
+        </blockquote>
+        <figcaption class="blockquote-footer">
+            Hippocrates in <cite title="Source Title">400 BC</cite>
+        </figcaption>
+    </figure>
+
+    <hr class="custom-divider">
+
+    <div class="text-center">
+        <h5 class="display-5">Mumbai's Culinary Magic</h5>
+        <p>Explore the rich and vibrant flavors of Mumbai – from street food to fine dining!</p>
+    </div>
+
+    <!-- Popular Dishes Table -->
+    <div class="container my-5">
+        <h3 class="text-center mb-4">Popular Dishes in Mumbai</h3>
+        <table class="table table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Dish</th>
+                    <th>Description</th>
+                    <th>Best Spot to Try</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Vada Pav</td>
+                    <td>A spicy potato fritter in a bread bun served with chutney.</td>
+                    <td>Anand Stall, Vile Parle</td>
+                </tr>
+                <tr>
+                    <td>Pav Bhaji</td>
+                    <td>Buttered bread served with a spicy, mashed vegetable curry.</td>
+                    <td>Sardar Pav Bhaji, Tardeo</td>
+                </tr>
+                <tr>
+                    <td>Bhel Puri</td>
+                    <td>A crunchy and tangy street snack made with puffed rice, tamarind, and spices.</td>
+                    <td>Juhu Beach Stalls</td>
+                </tr>
+                <tr>
+                    <td>Kulfi</td>
+                    <td>A traditional Indian frozen dessert made with condensed milk and cardamom.</td>
+                    <td>Badshah, Crawford Market</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Famous Food Spots Grid -->
+    <div class="container my-5">
+        <h3 class="text-center mb-4">Famous Food Spots in Mumbai</h3>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="{{ url_for('static', filename='mumbai/image5.jpeg') }}" class="card-img-top" alt="Street Food">
+                    <div class="card-body">
+                        <h5 class="card-title">Street Food</h5>
+                        <p class="card-text">Dive into the bustling lanes of Mumbai for mouthwatering snacks.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="{{ url_for('static', filename='mumbai/image6.jpeg') }}" class="card-img-top" alt="Fine Dining">
+                    <div class="card-body">
+                        <h5 class="card-title">Fine Dining</h5>
+                        <p class="card-text">Experience luxury with Mumbai's top-notch restaurants.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="{{ url_for('static', filename='mumbai/image7.jpeg') }}" class="card-img-top" alt="Desserts">
+                    <div class="card-body">
+                        <h5 class="card-title">Desserts</h5>
+                        <p class="card-text">Indulge in the sweetest treats Mumbai has to offer.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="custom-divider">
+
+    <!-- Accordion for FAQs -->
+    <div class="container my-5">
+        <h3 class="text-center mb-4">Frequently Asked Questions</h3>
+        <div class="accordion" id="foodFaq">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="faqOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        What is Mumbai's most iconic street food?
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="faqOne" data-bs-parent="#foodFaq">
+                    <div class="accordion-body">
+                        Mumbai's most iconic street food is undoubtedly the Vada Pav, known as the "Indian Burger."
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="faqTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Are there vegetarian options in Mumbai's food scene?
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="faqTwo" data-bs-parent="#foodFaq">
+                    <div class="accordion-body">
+                        Absolutely! Mumbai offers a variety of vegetarian dishes, including Pav Bhaji, Dhokla, and Pani Puri.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="faqThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Where can I find the best seafood in Mumbai?
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="faqThree" data-bs-parent="#foodFaq">
+                    <div class="accordion-body">
+                        The best seafood can be found at Gajalee in Vile Parle or Trishna in Kala Ghoda.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="custom-divider">
+
+    <!-- Testimonials Section -->
+    <div class="container my-5">
+        <h3 class="text-center mb-4">What Visitors Say</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <blockquote class="blockquote">
+                    <p>"Mumbai's street food is an explosion of flavors. I'll never forget the Vada Pav!" <br/> ~ Alex from New York</p>
+                </blockquote>
+            </div>
+            <div class="col-md-6">
+                <blockquote class="blockquote">
+                    <p>"The seafood at Trishna was incredible. Can't wait to come back!" <br/> ~ Sofia from London</p>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+
+    <!-- Creates footer which allows user to return to home page -->
+    <footer class="bg-dark text-white text-center py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mb-3">
+                    <a href="{{ url_for('index') }}" class="btn btn-light">Take me back to the main page</a>
+                </div>
+                <div class="col-12">
+                    &copy; 2024 Mumbai Travel. All Rights Reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

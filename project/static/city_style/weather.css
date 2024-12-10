@@ -1,0 +1,91 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #f7f7f7;
+    font-family: 'Poppins', sans-serif;
+    color: #343a40;
+    min-height: 100vh;
+}
+
+.container {
+    flex: 1 0 auto;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.weather-info, .content-box {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+h1, h3 {
+    color: #343a40;
+    font-weight: 700;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 1.75rem;
+    margin-bottom: 15px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+    width: 100%;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+footer {
+    flex-shrink: 0;
+    background-color: #343a40;
+    color: white;
+    padding: 10px 0;
+    width: 100%;
+    text-align: center;
+    margin-top: auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.back-home-section {
+    padding-bottom: 30px;
+}
+
+p {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.content-box h3 {
+    font-weight: 600;
+    color: #007bff;
+}
+
+/* Ensure navbar doesn't affect the layout */
+.navbar {
+    flex-shrink: 0;
+}

@@ -1,0 +1,170 @@
+/* Body styling for full-screen layout with background image */
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: url("/static/wallpaper1.jpeg") no-repeat center center fixed;
+    background-size: cover;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto', sans-serif;
+    overflow-x: hidden;
+}
+
+/* Main container for the quiz with styling for size, background, and shadows */
+.quiz-container {
+    max-width: 700px;
+    width: 90%;
+    background: #ffffff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+/* Hover effect for quiz container to enhance shadow intensity */
+.quiz-container:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Title styling for the quiz */
+.quiz-title {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+/* Styling for each question block */
+.quiz-question {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+    color: #34495e;
+    font-weight: 500;
+}
+
+/* Container styling for answer options */
+.form-check {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+/* Background highlight on hover for answer options */
+.form-check:hover {
+    background-color: #f8f9fa;
+}
+
+/* Styling for the label text of answer options */
+.form-check-label {
+    font-size: 1.1rem;
+    color: #576574;
+    cursor: pointer;
+}
+
+/* Custom appearance for radio buttons */
+.form-check-input {
+    accent-color: #3498db;
+    margin-right: 10px;
+}
+
+/* Shared styling for buttons */
+.btn-primary,
+.btn-secondary,
+.btn-success {
+    font-size: 1.2rem;
+    border-radius: 50px;
+    padding: 12px 30px;
+    transition: all 0.3s ease;
+}
+
+/* Primary button with blue color scheme */
+.btn-primary {
+    background-color: #3498db;
+    border-color: #3498db;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+    border-color: #2980b9;
+}
+
+/* Secondary button with gray color scheme */
+.btn-secondary {
+    background-color: #95a5a6;
+    border-color: #95a5a6;
+}
+
+.btn-secondary:hover {
+    background-color: #7f8c8d;
+    border-color: #7f8c8d;
+}
+
+/* Success button with green color scheme */
+.btn-success {
+    background-color: #2ecc71;
+    border-color: #2ecc71;
+}
+
+.btn-success:hover {
+    background-color: #27ae60;
+    border-color: #27ae60;
+}
+
+/* Styling for the progress bar in the quiz */
+.progress {
+    height: 10px;
+    margin-bottom: 30px;
+}
+
+.progress-bar {
+    background-color: #3498db;
+    transition: width 0.3s ease;
+}
+
+/* Hidden state for quiz slides */
+.quiz-slide {
+    display: none;
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Visible state for active quiz slides */
+.quiz-slide.active {
+    display: block;
+}
+
+/* Fade-in animation for transitioning slides */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive styling for smaller screens */
+@media (max-width: 768px) {
+    .quiz-container {
+        padding: 30px;
+    }
+
+    .quiz-title {
+        font-size: 2rem;
+    }
+
+    .quiz-question {
+        font-size: 1.2rem;
+    }
+
+    .form-check-label {
+        font-size: 1rem;
+    }
+}

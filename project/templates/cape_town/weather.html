@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Weather in Cape Town</title>
+        <!-- Google Fonts for better typography -->
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/static/city_style/weather.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <!-- Navbar -->
+        {% include 'cape_town/navbar.html' %}
+
+        <div class="container">
+            <!-- Two Containers Side-by-Side -->
+            <div class="row content-section">
+                <div class="col-md-6">
+                    <div class="content-box">
+                        <h3 class="text-center">What to Wear</h3>
+                        <p class="text-center">Cape Town’s weather is incredibly diverse. During the summer (November to March), lightweight clothing, hats, and sunscreen are essential for staying cool and protected under the sun. Winter (May to August) calls for warmer clothing, as temperatures can drop significantly, especially in the evenings. Layers are key for adapting to the changing conditions. Don’t forget a windbreaker for those breezy days!</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="content-box">
+                        <h3 class="text-center">Weather Overview</h3>
+                        <p class="text-center">Cape Town enjoys a Mediterranean climate, with warm, dry summers and cool, wet winters. Summers (November to March) see temperatures averaging 25°C to 30°C (77°F to 86°F), making it the perfect time for outdoor activities. Winters (May to August) are cooler, with temperatures ranging from 8°C to 18°C (46°F to 64°F). Rainfall is common in winter, adding a lush beauty to the landscapes.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Current Weather Information Below -->
+            <div class="row content-section">
+                <div class="col-md-12">
+                    <div class="weather-info">
+                        <h1 class="text-center mb-4">Current Weather Information for Cape Town</h1>
+                        <div id="weather-data">
+                            <p>Loading weather data...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Back to Home Button with padding -->
+            <div class="row back-home-section">
+                <div class="col-md-12">
+                    <a href="{{ url_for('explore', city_name='cape_town', subpage='index') }}" class="btn btn-primary mt-4">Back to Home</a>
+                </div>
+            </div>
+        </div>
+
+        <footer class="bg-dark text-white text-center py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <a href="{{ url_for('index') }}" class="btn btn-light">Take me back to the main page</a>
+                    </div>
+                    <div class="col-12">
+                        &copy; 2024 Cape Town Travel. All Rights Reserved.
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+        <script>
+            // Making the city and API key constant variables
+            const city = "Cape Town";
+            const API_KEY = 'b6725bb82b4fd00cfeb5450908c9492c';
+
+            // Fetching weather data from the API
+            fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.cod === 200) {
+                        const weatherInfo = `
+                        <h2 class="text-primary">Weather right now in ${data.name}</h2>
+                        <p><strong>Temperature:</strong> ${data.main.temp}°C</p>
+                        <p><strong>Humidity:</strong> ${data.main.humidity}%</p>
+                        <p><strong>Pressure:</strong> ${data.main.pressure} hPa</p>
+                        <p><strong>Wind Speed:</strong> ${data.wind.speed} m/s</p>
+                        <p><strong>Description:</strong> ${data.weather[0].description}</p>
+                    `;
+                        document.getElementById('weather-data').innerHTML = weatherInfo;
+                    } else {
+                        document.getElementById('weather-data').innerHTML = '<p class="text-danger">Error fetching weather data.</p>';
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('weather-data').innerHTML = `<p class="text-danger">Error fetching weather data: ${error}</p>`;
+                });
+        </script>
+    </body>
+
+</html>

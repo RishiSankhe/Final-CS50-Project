@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Songs - Istanbul Travel</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <style>
+            /* Global Styles */
+            body {
+                font-family: 'Arial', sans-serif;
+                line-height: 1.6;
+                background-color: #f8f9fa;
+                margin: 0;
+                padding: 0;
+            }
+
+            /* Main Content Styling */
+            .container {
+                max-width: 900px;
+                margin: auto;
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 2rem;
+                color: #17A2B8;
+                /* Bluish-green for the heading */
+                font-weight: bold;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            .lead {
+                font-size: 1.2rem;
+                margin-bottom: 20px;
+            }
+
+            ul {
+                padding-left: 20px;
+            }
+
+            ul li {
+                margin-bottom: 10px;
+            }
+
+            ul li strong {
+                color: #17A2B8;
+                /* Bluish-green for bullet points */
+            }
+
+            /* Song Section */
+            .song-section {
+                background-color: #ffffff;
+                padding: 30px;
+                border-radius: 8px;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+                margin-bottom: 20px;
+            }
+
+            .spotify-container {
+                margin-top: 20px;
+                border-radius: 12px;
+                overflow: hidden;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            iframe {
+                width: 100%;
+                height: 352px;
+                border: none;
+            }
+
+            /* Back to Home Button */
+            .back-home-btn {
+                background-color: #17A2B8;
+                /* Bluish-green for the button */
+                color: #fff;
+                border: none;
+                padding: 15px 0;
+                font-size: 1.2rem;
+                width: 100%;
+                text-align: center;
+                display: block;
+                text-decoration: none;
+                border-radius: 8px;
+                margin-top: 20px;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .back-home-btn:hover {
+                background-color: #117A8B;
+                /* Darker bluish-green for hover effect */
+                text-decoration: none;
+            }
+
+            /* Footer */
+            footer {
+                background-color: #212529;
+                color: #f8f9fa;
+                text-align: center;
+                padding: 15px 0;
+                margin-top: 20px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- Navbar -->
+        {% include 'istanbul/navbar.html' %}
+
+        <!-- Main Content -->
+        <div class="container my-5">
+            <h2>Song That Embodies Istanbul: "<strong>Katibim (Üsküdar'a Giderken)</strong>"</h2>
+            <p class="lead">
+                Istanbul is a city of timeless beauty, rich culture, and a unique blend of East and West. The song "<strong>Katibim (Üsküdar'a Giderken)</strong>" perfectly encapsulates the soul of Istanbul, reflecting its deep-rooted history and vibrant spirit.
+            </p>
+            <p>
+                This Turkish classic carries a nostalgic melody and poetic lyrics that evoke the essence of the city's charm. Whether it's the bustling bazaars, tranquil waters of the Bosphorus, or the grandeur of its mosques, "<strong>Katibim</strong>" is a tribute to everything Istanbul stands for.
+            </p>
+            <ul>
+                <li><strong>Traditional Heritage:</strong> The song mirrors Istanbul's rich Ottoman-era history and its timeless allure.</li>
+                <li><strong>Emotional Resonance:</strong> Its heartfelt lyrics speak of love, loss, and longing—emotions that resonate with everyone who visits Istanbul.</li>
+                <li><strong>Iconic Melody:</strong> The song's melody is a reminder of Istanbul's role as a cultural bridge between continents.</li>
+                <li><strong>Timeless Appeal:</strong> Just like Istanbul, the song remains evergreen, connecting generations with its beauty.</li>
+            </ul>
+
+            <!-- Spotify Embed Section -->
+            <div class="spotify-container">
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/6u6RV1xNvE4xd5gVq1uHnS?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
+
+            <!-- Back to Home Button -->
+            <a href="{{ url_for('explore', city_name='istanbul', subpage='index') }}" class="back-home-btn">Back to Home</a>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-dark text-white text-center py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <a href="{{ url_for('index') }}" class="btn btn-light">Take me back to the main page</a>
+                    </div>
+                    <div class="col-12">
+                        &copy; 2024 Istanbul Travel. All Rights Reserved.
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Bootstrap JS and Popper.js -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    </body>
+
+</html>

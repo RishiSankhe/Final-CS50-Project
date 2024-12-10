@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Travel to Tokyo</title>
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link href="/static/city_style/index.css" rel="stylesheet">
+        <script src="/static/loader.js"></script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                // Carousel functionality for sliding images
+                let currentSlide = 0;
+                const slides = document.querySelectorAll('.carousel-slide img');
+                const totalSlides = slides.length;
+                const carouselSlide = document.querySelector('.carousel-slide');
+
+                // Function to move to the next or previous slide
+                function moveSlide(step) {
+                    currentSlide = (currentSlide + step + totalSlides) % totalSlides;
+                    carouselSlide.style.transform = `translateX(-${currentSlide * (100 / totalSlides)}%)`;
+                }
+
+                // Automatic sliding every 6 seconds
+                const autoSlide = setInterval(() => {
+                    moveSlide(1);
+                }, 6000);
+
+                // Add event listeners for the carousel controls (next/previous buttons)
+                document.querySelectorAll('.carousel-control').forEach(control => {
+                    control.addEventListener('click', () => {
+                        clearInterval(autoSlide);
+                        moveSlide(control.classList.contains('left') ? -1 : 1);
+                    });
+                });
+            });
+
+            document.addEventListener('DOMContentLoaded', () => {
+                // Fetch news data for Tokyo using an API
+                const requestOptions = {
+                    method: 'GET'
+                };
+
+                // Parameters for the API request
+                const params = {
+                    api_token: 'r4TYmmO2O5EznzYKieAjNgA5E4iDREZBHcq6AOsB',
+                    categories: 'general',
+                    search: 'tokyo',
+                    limit: '3',
+                    language: 'en'
+                };
+
+                // Build the query string for news API
+                const esc = encodeURIComponent;
+                const query = Object.keys(params)
+                    .map(k => esc(k) + '=' + esc(params[k]))
+                    .join('&');
+
+                // Make a fetch request to the news API
+                fetch("https://api.thenewsapi.com/v1/news/all?" + query, requestOptions)
+                    .then(response => response.json())
+                    .then(data => {
+                        const newsContainer = document.getElementById('news-container');
+                        data.data.forEach(article => {
+                            const col = document.createElement('div');
+                            col.className = 'col-md-4 mb-4';
+
+                            const card = `
+                            <div class="card">
+                                <img src="${article.image_url}" class="card-img-top" alt="${article.title}">
+                                <div class="card-body">
+                                    <h5 class="card-title">${article.title}</h5>
+                                    <p class="card-text">${article.description}</p>
+                                    <a href="${article.url}" target="_blank" class="btn btn-primary">Read More</a>
+                                </div>
+                            </div>
+                        `;
+
+                            col.innerHTML = card;
+                            newsContainer.appendChild(col);
+                        });
+                    })
+                    .catch(error => console.log('error', error));
+            });
+
+            // Function to add the selected city to the bucketlist
+            function addToBucketlist(button) {
+                fetch('/add_to_bucketlist', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        city_name: button.dataset.city
+                    })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            button.innerText = "Added";
+                            button.disabled = true; // Disable button after adding
+                        }
+                    });
+            }
+        </script>
+    </head>
+
+    <body>
+        <!-- Navbar -->
+        {% include 'tokyo/navbar.html' %}
+
+        <div class="carousel-container">
+            <div class="carousel">
+                <div class="carousel-slide">
+                    <img src="{{ url_for('static', filename='tokyo/car1.jpeg') }}" alt="Image 1">
+                    <img src="{{ url_for('static', filename='tokyo/car2.jpeg') }}" alt="Image 2">
+                    <img src="{{ url_for('static', filename='tokyo/car3.jpeg') }}" alt="Image 3">
+                    <img src="{{ url_for('static', filename='tokyo/car4.jpeg') }}" alt="Image 4">
+                    <img src="{{ url_for('static', filename='tokyo/car5.jpeg') }}" alt="Image 1">
+
+                </div>
+            </div>
+            <div class="carousel-text">
+                <h1>Welcome to Tokyo!</h1>
+                <h1><span>
+                    <p class="lead">Tokyo, a city where tradition meets modernity. Explore the vibrant culture, iconic landmarks, and bustling streets of this amazing city!</p>
+                </span></h1>
+            </div>
+            <!-- Carousel Buttons -->
+            <button class="carousel-control left" onclick="moveSlide(-1)">&#10094;</button>
+            <button class="carousel-control right" onclick="moveSlide(1)">&#10095;</button>
+        </div>
+
+        <!-- About Tokyo -->
+        <section class="container my-5">
+            <h2 class="text-center mb-4 section-title">Discover Tokyo</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="{{ url_for('static', filename='tokyo/image1.jpeg') }}" alt="Tokyo Tower" class="img-fluid rounded">
+                </div>
+                <div class="col-md-6">
+                    <h3 class="section-title-small">Tokyo Tower</h3>
+                    <p>The Tokyo Tower is a symbol of Japan’s post-war rebirth as a major economic power. It offers incredible views of the city and beyond.</p>
+                    <ul>
+                        <li><b>Location:</b> Minato City, Tokyo</li>
+                        <li><b>Entry Fee:</b> ¥900-¥2800</li>
+                        <li><b>Best Time to Visit:</b> Evening for a lit-up view</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Iconic Monuments -->
+        <section class="bg-light py-5">
+            <div class="container">
+                <h2 class="text-center mb-4 section-title">Iconic Monuments</h2>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <img src="{{ url_for('static', filename='tokyo/image2.jpeg') }}" alt="Senso-ji Temple" class="img-fluid rounded">
+                            <div class="card-body">
+                                <h5 class="card-title">Senso-ji Temple</h5>
+                                <p class="card-text">Tokyo's oldest temple, known for its stunning architecture and peaceful ambiance.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <img src="{{ url_for('static', filename='tokyo/image3.jpeg') }}" alt="Shibuya Crossing" class="img-fluid rounded">
+                            <div class="card-body">
+                                <h5 class="card-title">Shibuya Crossing</h5>
+                                <p class="card-text">Experience the world’s busiest pedestrian crossing, an iconic Tokyo experience.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <img src="{{ url_for('static', filename='tokyo/image4.jpeg') }}" alt="Akihabara" class="img-fluid rounded">
+                            <div class="card-body">
+                                <h5 class="card-title">Akihabara</h5>
+                                <p class="card-text">A paradise for anime, manga, and tech lovers, showcasing Tokyo's modern culture.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Culture and Festivals -->
+        <section class="container my-5 culture-section">
+            <h2 class="text-center mb-4 section-title">Culture and Festivals</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Cherry Blossom Festival</h3>
+                    <p>Every spring, Tokyo’s parks burst into pink with the blooming of cherry blossoms. The festival is a celebration of beauty and renewal.</p>
+                </div>
+                <div class="col-md-6">
+                    <h3>Anime and Cosplay</h3>
+                    <p>Tokyo is the heart of Japan’s anime culture. Explore cosplay events, anime museums, and themed cafes.</p>
+                </div>
+            </div>
+        </section>
+        <hr>
+
+        <section class="container my-5">
+            <h2 class="text-center mb-4 section-title">Latest News</h2>
+            <div id="news-container" class="row">
+                <!-- News articles will be dynamically added here through the js code that has been included -->
+            </div>
+        </section>
+
+        <!-- Footer which allows user to return to home as well as add the place to bucketlist-->
+        <footer class="bg-dark text-white text-center py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <button class="btn btn-success btn-lg" onclick="addToBucketlist(this)" data-city="Tokyo">
+                            <i class="bi bi-plus"></i> Add to Bucketlist
+                        </button>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <a href="{{ url_for('index') }}" class="btn btn-light">Take me back to the main page</a>
+                    </div>
+                    <div class="col-12">
+                        &copy; 2024 Tokyo Travel. All Rights Reserved.
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    </body>
+
+</html>

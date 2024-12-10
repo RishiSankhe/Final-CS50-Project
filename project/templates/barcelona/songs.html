@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Songs - Barcelona Travel</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <style>
+            /* Global Styles */
+            body {
+                font-family: 'Arial', sans-serif;
+                line-height: 1.6;
+                background-color: #f8f9fa;
+                margin: 0;
+                padding: 0;
+            }
+
+            /* Main Content Styling */
+            .container {
+                max-width: 900px;
+                margin: auto;
+            }
+
+            h2 {
+                font-size: 2rem;
+                color: #e44232;
+                /* Red color matching Spotify and Back to Home theme */
+                font-weight: bold;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            .lead {
+                font-size: 1.2rem;
+                margin-bottom: 20px;
+            }
+
+            ul {
+                padding-left: 20px;
+            }
+
+            ul li {
+                margin-bottom: 10px;
+            }
+
+            ul li strong {
+                color: #e44232;
+                /* Red color matching Spotify song theme */
+            }
+
+            /* Song Section */
+            .song-section {
+                background-color: #ffffff;
+                padding: 10px;
+                border-radius: 8px;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+                margin-bottom: 20px;
+            }
+
+            .spotify-container {
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+                max-width: 50%;
+                margin: 20px auto;
+                /* Center the container */
+            }
+
+            iframe {
+                width: 100%;
+                height: 352px;
+                border: none;
+            }
+
+            /* Back to Home Button */
+            .back-home-btn {
+                background-color: #b32d2e;
+                /* Dark red color for button */
+                color: #fff;
+                border: none;
+                padding: 15px 0;
+                font-size: 1.2rem;
+                text-align: center;
+                display: block;
+                text-decoration: none;
+                border-radius: 8px;
+                max-width: 50%;
+                margin: 20px auto;
+                /* Center the button */
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .back-home-btn:hover {
+                background-color: #931e1f;
+                text-decoration: none;
+            }
+
+            /* Footer */
+            footer {
+                background-color: #212529;
+                color: #f8f9fa;
+                text-align: center;
+                padding: 15px 0;
+                margin-top: 20px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- Navbar -->
+        {% include 'barcelona/navbar.html' %}
+
+        <!-- Main Content -->
+        <div class="container my-5">
+            <h2>Song That Embodies Barcelona: "<strong>Historia De Un Taxi by Ricardo Arjona</strong>"</h2>
+            <p class="lead">
+                Barcelona, a city full of unexpected twists, vibrant streets, and intriguing stories, is beautifully reflected in the narrative song "<strong>Historia De Un Taxi</strong>". The song's vivid storytelling aligns with the city's rich history and dynamic atmosphere.
+            </p>
+            <p>
+                Sung by Ricardo Arjona, this captivating track delves into a chance encounter, much like the serendipitous moments you might experience wandering through Barcelona’s bustling streets or hidden alleyways.
+            </p>
+            <ul>
+                <li><strong>Street Life:</strong> The song's narrative unfolds like a journey through Barcelona’s lively streets, echoing the city's vibrant pulse.</li>
+                <li><strong>Mystery and Intrigue:</strong> Much like the hidden corners of the Gothic Quarter, the song captures a sense of mystery and unexpected encounters.</li>
+                <li><strong>Emotion and Connection:</strong> Arjona’s storytelling mirrors the deep emotional connections that Barcelona fosters between its people and visitors.</li>
+                <li><strong>Dynamic Energy:</strong> The rhythm of the song parallels the city’s constant movement, from Las Ramblas to its buzzing nightlife.</li>
+            </ul>
+        </div>
+
+        <!-- Spotify Embed Section -->
+        <div class="spotify-container">
+            <iframe src="https://open.spotify.com/embed/track/005Dlt8Xaz3DkaXiRJgdiS?utm_source=generator" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+        </div>
+
+        <!-- Back to Home Button -->
+        <a href="{{ url_for('explore', city_name='barcelona', subpage='index') }}" class="back-home-btn">Back to Home</a>
+
+        <!-- Footer -->
+        <footer class="bg-dark text-white text-center py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <a href="{{ url_for('index') }}" class="btn btn-light">Take me back to the main page</a>
+                    </div>
+                    <div class="col-12">
+                        &copy; 2024 Barcelona Travel. All Rights Reserved.
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Bootstrap JS and Popper.js -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    </body>
+
+</html>

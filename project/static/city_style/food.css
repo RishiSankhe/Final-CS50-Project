@@ -1,0 +1,109 @@
+            /* Blockquote Styling */
+            blockquote {
+                font-style: italic;
+                border-left: 5px solid #ccc;
+                padding-left: 20px;
+                margin: 20px 0;
+                font-size: 1.2rem;
+                color: #555;
+            }
+
+            /* Styling for the "by who" (author/source) part */
+            blockquote footer {
+                font-size: 1rem;
+                color: #ffffff;
+                font-weight: normal;
+                text-align: right;
+                /* Align the source to the right */
+                margin-top: 10px;
+                font-style: normal;
+            }
+
+            /* Add a lighter, softer look to the citation */
+            blockquote footer cite {
+                font-style: normal;
+                color: #ffffff;
+                /* Slightly darker for emphasis */
+            }
+
+            /* Custom Divider Styling */
+            .custom-divider {
+                border-top: 3px dashed #ff7f50;
+                /* Adds a vibrant dashed line */
+                margin: 40px 0;
+                /* Adds more space around the divider */
+            }
+
+            .solid-divider {
+                border-top: 3px solid #2e3d49;
+                /* Adds a solid, stylish line */
+                margin: 30px 0;
+            }
+
+            /* Table Styling */
+            table {
+                border-collapse: separate;
+                border-spacing: 0 10px;
+            }
+
+            table th,
+            table td {
+                text-align: center;
+                padding: 15px;
+            }
+
+            table th {
+                background-color: #343a40;
+                color: white;
+            }
+
+            /* Card Styling */
+            .card-body {
+                text-align: center;
+            }
+
+            /* Accordion Styling */
+            .accordion-button {
+                font-size: 1rem;
+                /* Match the overall font size */
+            }
+
+            /* Footer Styling */
+            footer {
+                background-color: #343a40;
+            }
+
+            /* Preloader styling */
+            .preloader {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: #ffffff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 9999;
+            }
+
+            .preloader-text {
+                font-size: 2rem;
+                font-weight: bold;
+                color: #007bff;
+                animation: pulse 1.5s infinite;
+            }
+
+            @keyframes pulse {
+
+                0%,
+                100% {
+                    opacity: 0.6;
+                }
+
+                50% {
+                    opacity: 1;
+                }
+            }
+
+

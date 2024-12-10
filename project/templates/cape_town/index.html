@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Travel to Cape Town</title>
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link href="/static/city_style/index.css" rel="stylesheet">
+        <script src="/static/loader.js"></script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                // Carousel functionality for sliding images
+                let currentSlide = 0;
+                const slides = document.querySelectorAll('.carousel-slide img');
+                const totalSlides = slides.length;
+                const carouselSlide = document.querySelector('.carousel-slide');
+
+                // Function to move to the next or previous slide
+                function moveSlide(step) {
+                    currentSlide = (currentSlide + step + totalSlides) % totalSlides;
+                    carouselSlide.style.transform = `translateX(-${currentSlide * (100 / totalSlides)}%)`;
+                }
+
+                // Automatic sliding every 6 seconds
+                const autoSlide = setInterval(() => {
+                    moveSlide(1);
+                }, 6000);
+
+                // Add event listeners for the carousel controls (next/previous buttons)
+                document.querySelectorAll('.carousel-control').forEach(control => {
+                    control.addEventListener('click', () => {
+                        clearInterval(autoSlide);
+                        moveSlide(control.classList.contains('left') ? -1 : 1);
+                    });
+                });
+            });
+
+            document.addEventListener('DOMContentLoaded', () => {
+                // Fetch news data for Cape Town using an API
+                const requestOptions = {
+                    method: 'GET'
+                };
+
+                // Parameters for the API request
+                const params = {
+                    api_token: 'r4TYmmO2O5EznzYKieAjNgA5E4iDREZBHcq6AOsB',
+                    categories: 'general',
+                    search: 'cape town',
+                    limit: '3',
+                    language: 'en'
+                };
+
+                // Build the query string for news API
+                const esc = encodeURIComponent;
+                const query = Object.keys(params)
+                    .map(k => esc(k) + '=' + esc(params[k]))
+                    .join('&');
+
+                // Make a fetch request to the news API
+                fetch("https://api.thenewsapi.com/v1/news/all?" + query, requestOptions)
+                    .then(response => response.json())
+                    .then(data => {
+                        const newsContainer = document.getElementById('news-container');
+                        data.data.forEach(article => {
+                            const col = document.createElement('div');
+                            col.className = 'col-md-4 mb-4';
+
+                            const card = `
+                            <div class="card">
+                                <img src="${article.image_url}" class="card-img-top" alt="${article.title}">
+                                <div class="card-body">
+                                    <h5 class="card-title">${article.title}</h5>
+                                    <p class="card-text">${article.description}</p>
+                                    <a href="${article.url}" target="_blank" class="btn btn-primary">Read More</a>
+                                </div>
+                            </div>
+                        `;
+
+                            col.innerHTML = card;
+                            newsContainer.appendChild(col);
+                        });
+                    })
+                    .catch(error => console.log('error', error));
+            });
+
+            // Function to add the selected city to the bucketlist
+            function addToBucketlist(button) {
+                fetch('/add_to_bucketlist', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        city_name: button.dataset.city
+                    })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            button.innerText = "Added";
+                            button.disabled = true; // Disable button after adding
+                        }
+                    });
+            }
+        </script>
+    </head>
+
+    <body>
+
+        <!-- Navbar -->
+        {% include 'cape_town/navbar.html' %}
+
+
+        <div class="carousel-container">
+            <div class="carousel">
+                <div class="carousel-slide">
+                    <img src="{{ url_for('static', filename='cape_town/car1.jpeg') }}" alt="Image 1">
+                    <img src="{{ url_for('static', filename='cape_town/car2.jpeg') }}" alt="Image 2">
+                    <img src="{{ url_for('static', filename='cape_town/car3.jpeg') }}" alt="Image 3">
+                    <img src="{{ url_for('static', filename='cape_town/car4.jpeg') }}" alt="Image 4">
+                    <img src="{{ url_for('static', filename='cape_town/car5.jpeg') }}" alt="Image 5">
+                </div>
+            </div>
+            <div class="carousel-text">
+                <h1>Welcome to Cape Town!</h1>
+                <h1><span>
+                    <p class="lead">Cape Town is known for its majestic Table Mountain, rich history, and stunning beaches. Discover the beauty and culture of this incredible city!</p>
+                </span></h1>
+            </div>
+            <!-- Left and Right Carousel Controls -->
+            <button class="carousel-control left" onclick="moveSlide(-1)">&#10094;</button>
+            <button class="carousel-control right" onclick="moveSlide(1)">&#10095;</button>
+        </div>
+
+        <!-- About Cape Town -->
+        <section class="container my-5">
+            <h2 class="text-center mb-4 section-title">Discover Cape Town</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="{{ url_for('static', filename='cape_town/image1.jpeg') }}" alt="Table Mountain" class="img-fluid rounded">
+                </div>
+                <div class="col-md-6">
+                    <h3 class="section-title-small">Table Mountain</h3>
+                    <p>Table Mountain is Cape Town's most iconic landmark, offering breathtaking views of the city and the surrounding coastline. Take the cable car or hike to the top for an unforgettable experience.</p>
+                    <ul>
+                        <li><b>Location:</b> Table Mountain National Park</li>
+                        <li><b>Entry Fee:</b> Varies</li>
+                        <li><b>Best Time to Visit:</b> Early morning or sunset</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Iconic Monuments -->
+        <section class="bg-light py-5">
+            <div class="container">
+                <h2 class="text-center mb-4 section-title">Iconic Monuments</h2>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <img src="{{ url_for('static', filename='cape_town/image2.jpeg') }}" alt="Robben Island" class="img-fluid rounded">
+                            <div class="card-body">
+                                <h5 class="card-title">Robben Island</h5>
+                                <p class="card-text">Explore the history of this UNESCO World Heritage Site where Nelson Mandela was imprisoned.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <img src="{{ url_for('static', filename='cape_town/image3.jpeg') }}" alt="Bo-Kaap" class="img-fluid rounded">
+                            <div class="card-body">
+                                <h5 class="card-title">Bo-Kaap</h5>
+                                <p class="card-text">Walk through this colorful neighborhood rich in Cape Malay culture and history.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <img src="{{ url_for('static', filename='cape_town/image4.jpeg') }}" alt="Cape Point" class="img-fluid rounded">
+                            <div class="card-body">
+                                <h5 class="card-title">Cape Point</h5>
+                                <p class="card-text">Visit the southern tip of the Cape Peninsula for stunning ocean views and rugged landscapes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Culture and Festivals -->
+        <section class="container my-5 culture-section">
+            <h2 class="text-center mb-4 section-title">Culture and Festivals</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Kaapse Klopse</h3>
+                    <p>Celebrate the vibrant Kaapse Klopse festival, also known as the Cape Town Minstrel Carnival, showcasing music, dancing, and colorful costumes.</p>
+                </div>
+                <div class="col-md-6">
+                    <h3>Cape Town International Jazz Festival</h3>
+                    <p>Experience the rhythm of Cape Town at one of the world's premier jazz festivals, attracting global artists and fans.</p>
+                </div>
+            </div>
+        </section>
+
+        <hr>
+
+        <section class="container my-5">
+            <h2 class="text-center mb-4 section-title">Latest News</h2>
+            <div id="news-container" class="row">
+                <!-- News articles will be dynamically added here -->
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-dark text-white text-center py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <button class="btn btn-success btn-lg" onclick="addToBucketlist(this)" data-city="Cape Town">
+                            <i class="bi bi-plus"></i> Add to Bucketlist
+                        </button>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <a href="{{ url_for('index') }}" class="btn btn-light">Take me back to the main page</a>
+                    </div>
+                    <div class="col-12">
+                        &copy; 2024 Cape Town Travel. All Rights Reserved.
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    </body>
+
+</html>
